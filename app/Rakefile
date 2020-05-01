@@ -1,0 +1,13 @@
+DKR_IMAGE = 'sweetlist-test:local'
+DKR_RUN = "docker run --rm -it -v #{File.dirname(__FILE__)}:/sweetlist -w /sweetlist #{DKR_IMAGE}"
+
+desc 'builds the Docker image used when running tests'
+task :build do
+  sh "docker build . -t #{DKR_IMAGE}"
+  sh "/bin/sh -c \"#{DKR_RUN} cat Gemfile.lock\" > Gemfile.lock"
+end
+
+desc 'runs the tests'
+task :test do
+  sh "#{DKR_RUN} rspec -fd spec/**/*_spec.rb"
+end
