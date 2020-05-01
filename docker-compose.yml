@@ -9,10 +9,13 @@ services:
       POSTGRES_PASSWORD: password
 
   web:
-    build: ./web
+    build:
+      context: .
+      dockerfile: ./web/Dockerfile
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     volumes:
-      - ./web:/app
+      - ./web:/sweetlist/web
+      - ./app:/sweetlist/app
     ports:
       - "3000:3000"
     depends_on:
