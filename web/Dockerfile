@@ -2,7 +2,7 @@ FROM ruby:2.7.1
 
 RUN \
   apt-get update -qq && \
-  apt-get install -y nodejs postgresql-client && \
+  apt-get install -y nodejs postgresql-client yarn && \
   mkdir /app
 
 WORKDIR /app
